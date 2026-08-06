@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Net Zero Scenarios · NetZero IQ · Net Zero Platform</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="nz-sidebar">
+  <div class="nz-brand">
+    <div class="nz-brand-mark"><i class="fa-solid fa-leaf"></i></div>
+    <div class="nz-brand-text">
+      <div class="nz-brand-title">NetZero IQ</div>
+      <div class="nz-brand-sub">Net Zero Platform</div>
+    </div>
+  </div>
+
+  <nav class="nz-nav">
+    <a href="index.html" class="nz-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="emission-upload.html" class="nz-link"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
+    <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
+    <a href="net-zero-scenarios.html" class="nz-link active"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
+    <a href="offset-projects.html" class="nz-link"><i class="fa-solid fa-seedling"></i> Offset Projects</a>  
+	<!-- <a href="#" class="nz-link"><i class="fa-solid fa-chart-line"></i> Progress Tracking</a> -->
+    <a href="reports.html" class="nz-link"><i class="fa-solid fa-file-lines"></i> Reports</a>
+
+    <!-- <div class="nz-nav-label">Account</div> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-gear"></i> Settings</a> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a> -->
+  <!-- </nav> -->
+
+  <!-- <div class="nz-sidebar-foot"> -->
+    <!-- <a href="#" class="nz-link" style="background:rgba(255,255,255,0.05);"> -->
+      <!-- <i class="fa-solid fa-circle-question"></i> Help &amp; Support -->
+    <!-- </a> -->
+  <!-- </div> -->
+</aside>
+
+<!-- ================= MAIN ================= -->
+<div class="nz-main">
+
+  <!-- TOP NAV -->
+  <header class="nz-topbar">
+    <div class="nz-topbar-title">
+      <h1>NetZero IQ <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
+      <p>Sustainability Command Center — updated moments ago</p>
+    </div>
+
+    <div class="nz-topbar-actions">
+      <button class="nz-darkmode-toggle" id="darkModeToggle" type="button">
+        <span class="nz-toggle-track"><span class="nz-toggle-thumb"><i class="fa-solid fa-moon" id="darkModeIcon"></i></span></span>
+        <span id="darkModeLabel">Dark mode</span>
+      </button>
+      <button class="nz-icon-btn" type="button"><i class="fa-regular fa-bell"></i><span class="nz-notif-dot"></span></button>
+      <div class="nz-profile">
+        <div class="nz-avatar">SJ</div>
+        <div>
+          <div class="nz-profile-name">Samiksha Jaunjale</div>
+          <div class="nz-profile-role">ESG Manager</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--ink-soft);"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="nz-content">
+
+    <div class="nz-breadcrumb">
+      <a href="index.html">Dashboard</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <span class="current">Net Zero Scenarios</span>
+    </div>
+
+    <div class="nz-page-header">
+      <h1>Net Zero Scenarios</h1>
+      <p>Generated automatically from your saved Reduction Plan — no data entry required here. The Moderate scenario becomes your company's official Net Zero Target Year across the platform.</p>
+    </div>
+
+    <!-- ================= EMPTY STATE (no reduction plan saved yet) ================= -->
+    <div class="nz-card nz-empty-state" id="nzs-empty-state" style="display:none;">
+      <i class="fa-solid fa-bullseye big"></i>
+      <h3 id="nzs-empty-title">No reduction plan found yet</h3>
+      <p id="nzs-empty-text">Scenarios are calculated from the annual reduction targets you set in the Reduction Planner. Set at least one category's reduction target above 0% and save your plan first.</p>
+      <a href="reduction-planner.html" class="nz-btn-primary" id="nzs-empty-cta"><i class="fa-solid fa-sliders"></i> Go to Reduction Planner</a>
+    </div>
+
+    <!-- ================= MAIN SCENARIOS CONTENT ================= -->
+    <div id="nzs-main-content" style="display:none;">
+
+      <!-- ================= OFFICIAL TARGET YEAR CALLOUT (MOVED TO TOP) ================= -->
+      <div class="nz-ring-card" style="max-width:none; margin-bottom:22px; flex-direction:row; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+        <div>
+          <div class="nz-ring-eyebrow">Official platform-wide value</div>
+          <div class="nz-ring-heading" style="margin-bottom:6px;">Net Zero Target Year</div>
+          <div style="font-size:12.5px; color:rgba(255,255,255,0.7);" data-nz-target-note>Not yet set</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="t-value" style="font-size:40px; line-height:1;" data-nz-target-year>Pending</div>
+          <div class="t-label" style="margin-top:4px;">Set by the Moderate scenario · appears on Dashboard and every module</div>
+        </div>
+      </div>
+
+      <!-- ================= SOURCE NOTE ================= -->
+      <div class="nz-card" style="padding:16px 22px; margin-bottom:22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+        <div class="left-note" id="nzs-source-note" style="font-size:12px; color:var(--ink-soft); display:flex; align-items:center; gap:8px;">
+          <i class="fa-solid fa-circle-info"></i> Based on your Reduction Plan
+        </div>
+        <div style="font-family:var(--font-mono); font-size:11.5px; color:var(--ink-soft);" id="nzs-baseline-note">
+          Baseline: -- tCO₂e · Blended annual reduction: --%
+        </div>
+      </div>
+
+      <!-- ================= SCENARIO CARDS ================= -->
+      <div class="nz-section-heading">
+        <h2><i class="fa-solid fa-route"></i> Three Automatically Generated Pathways</h2>
+        <span class="nz-section-link" style="cursor:default;">Updates when your Reduction Plan changes</span>
+      </div>
+
+      <div class="nz-charts-grid" id="nzs-scenario-cards">
+        <!-- JS renders 3 scenario cards here: Conservative / Moderate / Aggressive -->
+      </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="nz-footer">
+      <div>© 2026 NetZero IQ · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="theme.js"></script>
+<script src="net-zero-target.js"></script>
+<script src="net-zero-scenarios.js"></script>
+</body>
+</html>

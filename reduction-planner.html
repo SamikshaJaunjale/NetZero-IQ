@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reduction Planner · NetZero IQ · Net Zero Platform</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="nz-sidebar">
+  <div class="nz-brand">
+    <div class="nz-brand-mark"><i class="fa-solid fa-leaf"></i></div>
+    <div class="nz-brand-text">
+      <div class="nz-brand-title">NetZero IQ</div>
+      <div class="nz-brand-sub">Net Zero Platform</div>
+    </div>
+  </div>
+
+  <nav class="nz-nav">
+    <a href="index.html" class="nz-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="emission-upload.html" class="nz-link"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
+    <a href="reduction-planner.html" class="nz-link active"><i class="fa-solid fa-route"></i> Reduction Planner</a>
+    <a href="net-zero-scenarios.html" class="nz-link"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
+    <a href="offset-projects" class="nz-link"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-chart-line"></i> Progress Tracking</a> -->
+    <a href="reports" class="nz-link"><i class="fa-solid fa-file-lines"></i> Reports</a>
+
+    <!-- <div class="nz-nav-label">Account</div> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-gear"></i> Settings</a> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a> -->
+  <!-- </nav> -->
+
+  <!-- <div class="nz-sidebar-foot"> -->
+    <!-- <a href="#" class="nz-link" style="background:rgba(255,255,255,0.05);"> -->
+      <!-- <!-- <i class="fa-solid fa-circle-question"></i> Help &amp; Support --> 
+    <!-- </a> -->
+  <!-- </div> -->
+</aside>
+
+<!-- ================= MAIN ================= -->
+<div class="nz-main">
+
+  <!-- TOP NAV -->
+  <header class="nz-topbar">
+    <div class="nz-topbar-title">
+      <h1>NetZero IQ <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
+      <p>Sustainability Command Center — updated moments ago</p>
+    </div>
+
+    <div class="nz-topbar-actions">
+      <button class="nz-darkmode-toggle" id="darkModeToggle" type="button">
+        <span class="nz-toggle-track"><span class="nz-toggle-thumb"><i class="fa-solid fa-moon" id="darkModeIcon"></i></span></span>
+        <span id="darkModeLabel">Dark mode</span>
+      </button>
+      <button class="nz-icon-btn" type="button"><i class="fa-regular fa-bell"></i><span class="nz-notif-dot"></span></button>
+      <div class="nz-profile">
+        <div class="nz-avatar">SJ</div>
+        <div>
+          <div class="nz-profile-name">Samiksha Jaunjale</div>
+          <div class="nz-profile-role">ESG Manager</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--ink-soft);"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="nz-content">
+
+    <div class="nz-breadcrumb">
+      <a href="index.html">Dashboard</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <span class="current">Reduction Planner</span>
+    </div>
+
+    <div class="nz-page-header">
+      <h1>Reduction Planner</h1>
+      <p>Set an independent <strong>annual</strong> reduction target for every category you've entered in Emission Upload, based on what your business can realistically achieve each year.</p>
+    </div>
+
+    <!-- ================= EMPTY STATE (shown when no emission data exists) ================= -->
+    <div class="nz-card nz-empty-state" id="rp-empty-state" style="display:none;">
+      <i class="fa-solid fa-chart-line big"></i>
+      <h3>No emission data found yet</h3>
+      <p>The Reduction Planner reads directly from Emission Upload — enter your Scope 1, Scope 2 and Scope 3 emissions there first, and every category you fill in will appear here automatically.</p>
+      <a href="emission-upload.html" class="nz-btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Go to Emission Upload</a>
+    </div>
+
+    <!-- ================= MAIN PLANNER CONTENT ================= -->
+    <div id="rp-main-content" style="display:none;">
+
+      <!-- ================= CATEGORY-LEVEL REDUCTION PLANNING ================= -->
+      <div class="nz-section-heading">
+        <h2><i class="fa-solid fa-sliders"></i> Set Reduction Targets by Category</h2>
+        <span class="nz-section-link" style="cursor:default;">Independent % per category</span>
+      </div>
+
+      <div id="rp-scope-accordion">
+        <!-- JS renders one .nz-scope-card per scope that has data -->
+      </div>
+
+      <!-- ================= ACTION BAR ================= -->
+      <div class="nz-action-bar" id="rp-action-bar">
+        <div class="left-note" id="rp-last-saved-note"><i class="fa-solid fa-circle-info"></i> No reduction plan saved yet</div>
+        <div class="nz-action-group">
+          <button type="button" class="nz-btn-ghost danger" id="btn-reset-plan"><i class="fa-solid fa-arrow-rotate-left"></i> Reset Plan</button>
+          <button type="button" class="nz-btn-primary" id="btn-save-plan"><i class="fa-regular fa-floppy-disk"></i> Save Reduction Plan</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="nz-footer">
+      <div>© 2026 NetZero IQ · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="theme.js"></script>
+<script src="reduction-planner.js"></script>
+</body>
+</html>

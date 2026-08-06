@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emission Upload · NetZero IQ · Net Zero Platform</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="nz-sidebar">
+  <div class="nz-brand">
+    <div class="nz-brand-mark"><i class="fa-solid fa-leaf"></i></div>
+    <div class="nz-brand-text">
+      <div class="nz-brand-title">NetZero IQ</div>
+      <div class="nz-brand-sub">Net Zero Platform</div>
+    </div>
+  </div>
+
+  <nav class="nz-nav">
+    <a href="index.html" class="nz-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="emission-upload" class="nz-link active"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
+    <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
+    <a href="net-zero-scenarios" class="nz-link"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
+    <a href="offset-projects" class="nz-link"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-chart-line"></i> Progress Tracking</a> -->
+    <a href="reports" class="nz-link"><i class="fa-solid fa-file-lines"></i> Reports</a>
+
+    <!-- <div class="nz-nav-label">Account</div> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-gear"></i> Settings</a> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a> -->
+  <!-- </nav> -->
+
+  <!-- <div class="nz-sidebar-foot"> -->
+    <!-- <a href="#" class="nz-link" style="background:rgba(255,255,255,0.05);"> -->
+      <!-- <i class="fa-solid fa-circle-question"></i> Help &amp; Support -->
+    <!-- </a> -->
+  <!-- </div> -->
+</aside>
+
+<!-- ================= MAIN ================= -->
+<div class="nz-main">
+
+  <!-- TOP NAV -->
+  <header class="nz-topbar">
+    <div class="nz-topbar-title">
+      <h1>NetZero IQ <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
+      <p>Sustainability Command Center — updated moments ago</p>
+    </div>
+
+    <div class="nz-topbar-actions">
+      <button class="nz-darkmode-toggle" id="darkModeToggle" type="button">
+        <span class="nz-toggle-track"><span class="nz-toggle-thumb"><i class="fa-solid fa-moon" id="darkModeIcon"></i></span></span>
+        <span id="darkModeLabel">Dark mode</span>
+      </button>
+      <button class="nz-icon-btn" type="button"><i class="fa-regular fa-bell"></i><span class="nz-notif-dot"></span></button>
+      <div class="nz-profile">
+        <div class="nz-avatar">SJ</div>
+        <div>
+          <div class="nz-profile-name">Samiksha Jaunjale</div>
+          <div class="nz-profile-role">ESG Manager</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--ink-soft);"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="nz-content">
+
+    <div class="nz-breadcrumb">
+      <a href="index.html">Dashboard</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <span class="current">Emission Upload</span>
+    </div>
+
+    <div class="nz-page-header">
+      <h1>Emission Upload</h1>
+      <p>Upload and manage Scope 1, Scope 2 and Scope 3 greenhouse gas emissions.</p>
+    </div>
+
+    <!-- ================= COMPANY INFORMATION ================= -->
+    <div class="nz-card nz-info-card">
+      <div class="nz-info-card-head">
+        <h3><i class="fa-solid fa-building"></i> Company Information</h3>
+        <button type="button" class="nz-edit-btn" id="btn-edit-company"><i class="fa-solid fa-pen"></i> Edit details</button>
+        <button type="button" class="nz-btn-ghost" id="btn-cancel-company" style="display:none;"><i class="fa-solid fa-xmark"></i> Cancel</button>
+      </div>
+
+      <form id="company-info-form">
+        <div class="row">
+          <div class="col-md-4 nz-field">
+            <label for="company-name">Company Name</label>
+            <input type="text" class="form-control" id="company-name" name="company-name" value="NetZero IQ" readonly>
+          </div>
+          <div class="col-md-4 nz-field">
+            <label for="reporting-year">Reporting Year</label>
+            <select class="form-select" id="reporting-year" name="reporting-year" disabled>
+              <option selected>FY 2026</option>
+              <option>FY 2025</option>
+              <option>FY 2024</option>
+            </select>
+          </div>
+          <div class="col-md-4 nz-field">
+            <label for="reporting-period">Reporting Period</label>
+            <select class="form-select" id="reporting-period" name="reporting-period" disabled>
+              <option selected>Jan 2026 – Dec 2026</option>
+              <option>Q1 2026</option>
+              <option>Q2 2026</option>
+            </select>
+          </div>
+          <div class="col-md-4 nz-field">
+            <label for="industry">Industry</label>
+            <input type="text" class="form-control" id="industry" name="industry" value="Industrial Manufacturing &amp; Logistics" readonly>
+          </div>
+          <div class="col-md-4 nz-field">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country" name="country" value="United States (HQ)" readonly>
+          </div>
+          <div class="col-md-4 nz-field">
+            <label for="business-unit">Business Unit</label>
+            <select class="form-select" id="business-unit" name="business-unit" disabled>
+              <option selected>Global Operations</option>
+              <option>APAC Division</option>
+              <option>EMEA Division</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- ================= UPLOAD OPTIONS ================= -->
+    <div class="nz-section-heading">
+      <h2><i class="fa-solid fa-file-import"></i> Add Emission Data</h2>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-5">
+        <div class="nz-card nz-upload-option">
+          <div class="nz-upload-icon" style="background:linear-gradient(145deg,#5A8FEE,#2E6FE0);"><i class="fa-solid fa-file-arrow-up"></i></div>
+          <h4>Upload Excel / CSV File</h4>
+          <p>Bulk-import emissions using our standard template. We'll map each row to a Scope 1, 2 or 3 category automatically.</p>
+          <div class="nz-upload-formats">
+            <span class="nz-format-chip"><i class="fa-solid fa-file-excel"></i> .XLSX</span>
+            <span class="nz-format-chip"><i class="fa-solid fa-file-csv"></i> .CSV</span>
+          </div>
+          <button type="button" class="nz-btn-primary" id="btn-upload-file"><i class="fa-solid fa-upload"></i> Upload File</button>
+          <input type="file" id="file-upload-input" accept=".csv,.xlsx" style="display:none;">
+          <a href="#" class="nz-btn-link-template" id="link-download-template"><i class="fa-solid fa-download"></i> Bulk Upload Template</a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 d-none d-lg-flex">
+        <div class="nz-divider-or"><span class="line"></span>OR<span class="line"></span></div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="nz-card nz-upload-option">
+          <div class="nz-upload-icon" style="background:linear-gradient(145deg,#1FA97C,#10573F);"><i class="fa-solid fa-keyboard"></i></div>
+          <h4>Manual Entry</h4>
+          <p>Enter emission values directly for each category under Scope 1, Scope 2 and Scope 3, calculated using your GHG Protocol methodology.</p>
+          <div class="nz-upload-formats">
+            <span class="nz-format-chip"><i class="fa-solid fa-list-check"></i> 33 categories</span>
+          </div>
+          <button type="button" class="nz-btn-outline" id="btn-manual-entry"><i class="fa-solid fa-pen-to-square"></i> Enter Emissions</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SCOPE ACCORDION ================= -->
+    <div class="nz-section-heading">
+      <h2><i class="fa-solid fa-layer-group"></i> Manual Emission Entry</h2>
+      <span class="nz-section-link" style="cursor:default;">GHG Protocol categories</span>
+    </div>
+
+    <div id="scope-accordion">
+
+      <!-- SCOPE 1 -->
+      <div class="nz-card nz-scope-card">
+        <button type="button" class="nz-scope-header" data-bs-toggle="collapse" data-bs-target="#scope1-body" aria-expanded="true" aria-controls="scope1-body" id="scope1-toggle">
+          <div class="nz-scope-header-left">
+            <div class="nz-scope-num" style="background:linear-gradient(145deg,#5A8FEE,#2E6FE0);">1</div>
+            <div class="nz-scope-header-text">
+              <div class="title">Scope 1 · Direct Emissions</div>
+              <div class="sub">Company-owned combustion, fleet and process sources</div>
+            </div>
+          </div>
+          <div class="nz-scope-header-right">
+            <span class="nz-scope-completion incomplete" id="scope1-completion">0 / 10 entered</span>
+            <div class="nz-scope-subtotal">
+              <div class="amt" id="scope1-subtotal">0.00 t</div>
+              <div class="lbl">Subtotal</div>
+            </div>
+            <i class="fa-solid fa-chevron-down nz-scope-chevron"></i>
+          </div>
+        </button>
+
+        <div class="nz-scope-body collapse show" id="scope1-body">
+          <div class="nz-scope-table-wrap">
+            <table class="nz-scope-table" id="scope1-table">
+              <thead>
+                <tr><th style="width:26%">Category</th><th style="width:24%">Emission (tCO₂e)</th><th>Comments</th><th class="text-center" style="width:70px">Status</th></tr>
+              </thead>
+              <tbody>
+            <tr>
+              <td class="nz-row-category">Company-Owned Vehicles</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-vehicles-emission" name="s1-vehicles-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-vehicles-comment" name="s1-vehicles-comment" value="Fleet of 42 vehicles" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Stationary Combustion</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-stationary-emission" name="s1-stationary-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-stationary-comment" name="s1-stationary-comment" value="Boilers, on-site furnaces" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Generators</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-generators-emission" name="s1-generators-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-generators-comment" name="s1-generators-comment" value="Backup diesel generators" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Natural Gas</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-natgas-emission" name="s1-natgas-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-natgas-comment" name="s1-natgas-comment" value="Facility heating" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Diesel</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-diesel-emission" name="s1-diesel-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-diesel-comment" name="s1-diesel-comment" value="Fleet + generators" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Petrol</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-petrol-emission" name="s1-petrol-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-petrol-comment" name="s1-petrol-comment" value="Light commercial vehicles" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">LPG</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-lpg-emission" name="s1-lpg-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-lpg-comment" name="s1-lpg-comment" value="Warehouse forklifts" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Refrigerant Leakage</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-refrigerant-emission" name="s1-refrigerant-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-refrigerant-comment" name="s1-refrigerant-comment" value="Pending HVAC audit sign-off" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Industrial Process Emissions</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-process-emission" name="s1-process-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-process-comment" name="s1-process-comment" value="" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Other Scope 1 Sources</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s1-other-emission" name="s1-other-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s1-other-comment" name="s1-other-comment" value="" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCOPE 2 -->
+      <div class="nz-card nz-scope-card">
+        <button type="button" class="nz-scope-header" data-bs-toggle="collapse" data-bs-target="#scope2-body" aria-expanded="true" aria-controls="scope2-body" id="scope2-toggle">
+          <div class="nz-scope-header-left">
+            <div class="nz-scope-num" style="background:linear-gradient(145deg,#2E6FE0,#1949a8);">2</div>
+            <div class="nz-scope-header-text">
+              <div class="title">Scope 2 · Purchased Energy</div>
+              <div class="sub">Electricity, steam, heating and cooling</div>
+            </div>
+          </div>
+          <div class="nz-scope-header-right">
+            <span class="nz-scope-completion incomplete" id="scope2-completion">0 / 6 entered</span>
+            <div class="nz-scope-subtotal">
+              <div class="amt" id="scope2-subtotal">0.00 t</div>
+              <div class="lbl">Subtotal</div>
+            </div>
+            <i class="fa-solid fa-chevron-down nz-scope-chevron"></i>
+          </div>
+        </button>
+
+        <div class="nz-scope-body collapse show" id="scope2-body">
+          <div class="nz-scope-table-wrap">
+            <table class="nz-scope-table" id="scope2-table">
+              <thead>
+                <tr><th style="width:26%">Category</th><th style="width:24%">Emission (tCO₂e)</th><th>Comments</th><th class="text-center" style="width:70px">Status</th></tr>
+              </thead>
+              <tbody>
+            <tr>
+              <td class="nz-row-category">Purchased Electricity</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s2-electricity-emission" name="s2-electricity-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s2-electricity-comment" name="s2-electricity-comment" value="12 facilities, grid-supplied" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Purchased Steam</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s2-steam-emission" name="s2-steam-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s2-steam-comment" name="s2-steam-comment" value="Manufacturing plant, Ohio" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Purchased Heating</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s2-heating-emission" name="s2-heating-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s2-heating-comment" name="s2-heating-comment" value="District heating, EU offices" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Purchased Cooling</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s2-cooling-emission" name="s2-cooling-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s2-cooling-comment" name="s2-cooling-comment" value="District cooling, APAC HQ" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Renewable Electricity</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s2-renewable-emission" name="s2-renewable-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s2-renewable-comment" name="s2-renewable-comment" value="100% REC-backed, zero factor" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Other Scope 2 Sources</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s2-other-emission" name="s2-other-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s2-other-comment" name="s2-other-comment" value="" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCOPE 3 -->
+      <div class="nz-card nz-scope-card">
+        <button type="button" class="nz-scope-header" data-bs-toggle="collapse" data-bs-target="#scope3-body" aria-expanded="true" aria-controls="scope3-body" id="scope3-toggle">
+          <div class="nz-scope-header-left">
+            <div class="nz-scope-num" style="background:linear-gradient(145deg,#1FA97C,#10573F);">3</div>
+            <div class="nz-scope-header-text">
+              <div class="title">Scope 3 · Value Chain Emissions</div>
+              <div class="sub">Upstream and downstream activities across 17 categories</div>
+            </div>
+          </div>
+          <div class="nz-scope-header-right">
+            <span class="nz-scope-completion incomplete" id="scope3-completion">0 / 17 entered</span>
+            <div class="nz-scope-subtotal">
+              <div class="amt" id="scope3-subtotal">0.00 t</div>
+              <div class="lbl">Subtotal</div>
+            </div>
+            <i class="fa-solid fa-chevron-down nz-scope-chevron"></i>
+          </div>
+        </button>
+
+        <div class="nz-scope-body collapse show" id="scope3-body">
+          <div class="nz-scope-table-wrap">
+            <table class="nz-scope-table" id="scope3-table">
+              <thead>
+                <tr><th style="width:22%">Category</th><th style="width:22%">Emission (tCO₂e)</th><th>Comments</th><th class="text-center" style="width:70px">Status</th></tr>
+              </thead>
+              <tbody>
+            <tr>
+              <td class="nz-row-category">Business Flights</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-flights-emission" name="s3-flights-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-flights-comment" name="s3-flights-comment" value="Corporate travel program" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Accommodation</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-accommodation-emission" name="s3-accommodation-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-accommodation-comment" name="s3-accommodation-comment" value="Hotel stays, business travel" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Employee Commuting</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-commuting-emission" name="s3-commuting-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-commuting-comment" name="s3-commuting-comment" value="Survey-based estimate" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Public Transport</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-publictransport-emission" name="s3-publictransport-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-publictransport-comment" name="s3-publictransport-comment" value="Employee transit passes" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Freight &amp; Logistics</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-freight-emission" name="s3-freight-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-freight-comment" name="s3-freight-comment" value="Global distribution network" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Courier Services</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-courier-emission" name="s3-courier-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-courier-comment" name="s3-courier-comment" value="Parcel &amp; document courier" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Purchased Goods</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-purchasedgoods-emission" name="s3-purchasedgoods-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-purchasedgoods-comment" name="s3-purchasedgoods-comment" value="Raw materials &amp; components" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Capital Goods</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-capitalgoods-emission" name="s3-capitalgoods-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-capitalgoods-comment" name="s3-capitalgoods-comment" value="Machinery &amp; equipment" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Waste Generated</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-waste-emission" name="s3-waste-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-waste-comment" name="s3-waste-comment" value="Landfill + treatment" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Water Consumption</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-water-emission" name="s3-water-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-water-comment" name="s3-water-comment" value="Facility water usage" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Business Travel</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-businesstravel-emission" name="s3-businesstravel-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-businesstravel-comment" name="s3-businesstravel-comment" value="Awaiting expense system export" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Leased Assets</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-leasedassets-emission" name="s3-leasedassets-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-leasedassets-comment" name="s3-leasedassets-comment" value="Leased warehouse space" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Investments</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-investments-emission" name="s3-investments-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-investments-comment" name="s3-investments-comment" value="Equity investment share" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Fuel &amp; Energy Related Activities</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-fuelenergy-emission" name="s3-fuelenergy-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-fuelenergy-comment" name="s3-fuelenergy-comment" value="Upstream T&amp;D losses" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Downstream Transportation</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-downstreamtransport-emission" name="s3-downstreamtransport-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-downstreamtransport-comment" name="s3-downstreamtransport-comment" value="Last-mile delivery" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Upstream Transportation</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-upstreamtransport-emission" name="s3-upstreamtransport-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-upstreamtransport-comment" name="s3-upstreamtransport-comment" value="Awaiting supplier data" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+            <tr>
+              <td class="nz-row-category">Other Scope 3 Sources</td>
+              <td>
+                <div class="input-group nz-emission-group">
+                  <input type="number" step="0.01" min="0" class="form-control nz-emission-input" id="s3-other-emission" name="s3-other-emission" value="" placeholder="0.00">
+                  <span class="input-group-text">tCO₂e</span>
+                </div>
+              </td>
+              <td><input type="text" class="form-control nz-comment-input" id="s3-other-comment" name="s3-other-comment" value="Pending finance confirmation" placeholder="Optional remarks"></td>
+              <td class="text-center"><span class="nz-status empty" title="Required"><i class="fa-solid fa-circle-minus"></i></span></td>
+            </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= SUMMARY ================= -->
+    <div class="nz-section-heading">
+      <h2><i class="fa-solid fa-calculator"></i> Emissions Summary</h2>
+    </div>
+
+    <div class="nz-stats-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px;" id="summary-kpis">
+      <div class="nz-card nz-stat-card">
+        <div class="nz-stat-top">
+          <span class="nz-stat-label">Total Scope 1</span>
+          <span class="nz-stat-icon" style="background:rgba(90,143,238,0.15); color:#3b6fd6;"><i class="fa-solid fa-fire"></i></span>
+        </div>
+        <div class="nz-stat-value" id="kpi-scope1-total">0.00 <small>tCO₂e</small></div>
+        <div class="nz-summary-note" id="scope1-note"><i class="fa-solid fa-circle-exclamation"></i> No data entered yet</div>
+      </div>
+
+      <div class="nz-card nz-stat-card">
+        <div class="nz-stat-top">
+          <span class="nz-stat-label">Total Scope 2</span>
+          <span class="nz-stat-icon" style="background:rgba(46,111,224,0.12); color:var(--signal-blue);"><i class="fa-solid fa-bolt"></i></span>
+        </div>
+        <div class="nz-stat-value" id="kpi-scope2-total">0.00 <small>tCO₂e</small></div>
+        <div class="nz-summary-note" id="scope2-note"><i class="fa-solid fa-circle-exclamation"></i> No data entered yet</div>
+      </div>
+
+      <div class="nz-card nz-stat-card">
+        <div class="nz-stat-top">
+          <span class="nz-stat-label">Total Scope 3</span>
+          <span class="nz-stat-icon" style="background:rgba(143,217,183,0.28); color:var(--forest);"><i class="fa-solid fa-truck-fast"></i></span>
+        </div>
+        <div class="nz-stat-value" id="kpi-scope3-total">0.00 <small>tCO₂e</small></div>
+        <div class="nz-summary-note" id="scope3-note"><i class="fa-solid fa-circle-exclamation"></i> No data entered yet</div>
+      </div>
+
+      <div class="nz-card nz-stat-card" style="background:linear-gradient(160deg, rgba(16,87,63,0.09), rgba(46,111,224,0.06));">
+        <div class="nz-stat-top">
+          <span class="nz-stat-label">Grand Total Emissions</span>
+          <span class="nz-stat-icon" style="background:rgba(16,87,63,0.14); color:var(--deep-forest);"><i class="fa-solid fa-globe"></i></span>
+        </div>
+        <div class="nz-stat-value" id="kpi-grand-total">0.00 <small>tCO₂e</small></div>
+        <div class="nz-summary-note" id="grand-total-note"><i class="fa-solid fa-circle-exclamation"></i> 0 of 33 categories entered</div>
+      </div>
+    </div>
+
+    <!-- ================= ACTION BAR ================= -->
+    <div class="nz-action-bar" id="emission-action-bar">
+      <div class="left-note" id="last-saved-note"><i class="fa-solid fa-circle-info"></i> No draft saved yet</div>
+      <div class="nz-action-group">
+        <button type="button" class="nz-btn-ghost danger" id="btn-reset-form"><i class="fa-solid fa-arrow-rotate-left"></i> Reset Form</button>
+        <button type="button" class="nz-btn-ghost" id="btn-save-draft"><i class="fa-regular fa-floppy-disk"></i> Save Draft</button>
+        <button type="button" class="nz-btn-outline" id="btn-validate-data"><i class="fa-solid fa-shield-halved"></i> Validate Data</button>
+        <button type="button" class="nz-btn-primary" id="btn-submit-emissions"><i class="fa-solid fa-paper-plane"></i> Submit Emissions</button>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="nz-footer">
+      <div>© 2026 NetZero IQ · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="theme.js"></script>
+<script src="emission-upload.js"></script>
+</body>
+</html>

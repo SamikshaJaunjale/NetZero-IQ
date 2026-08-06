@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NetZero IQ · Net Zero Planning &amp; Optimization Platform</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="nz-sidebar">
+  <div class="nz-brand">
+    <div class="nz-brand-mark"><i class="fa-solid fa-leaf"></i></div>
+    <div class="nz-brand-text">
+      <div class="nz-brand-title">NetZero IQ</div>
+      <div class="nz-brand-sub">Net Zero Platform</div>
+    </div>
+  </div>
+
+  <nav class="nz-nav">
+    <a href="index.html" class="nz-link active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="emission-upload.html" class="nz-link"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
+    <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
+    <a href="net-zero-scenarios.html" class="nz-link"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
+    <a href="offset-projects.html" class="nz-link"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
+    <a href="#" class="nz-link"><i class="fa-solid fa-chart-line"></i> Progress Tracking</a>
+    <a href="reports.html" class="nz-link"><i class="fa-solid fa-file-lines"></i> Reports</a>
+
+    <div class="nz-nav-label">Account</div>
+    <a href="#" class="nz-link"><i class="fa-solid fa-gear"></i> Settings</a>
+    <a href="#" class="nz-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+  </nav>
+
+  <div class="nz-sidebar-foot">
+    <a href="#" class="nz-link" style="background:rgba(255,255,255,0.05);">
+      <i class="fa-solid fa-circle-question"></i> Help &amp; Support
+    </a>
+  </div>
+</aside>
+
+<!-- ================= MAIN ================= -->
+<div class="nz-main">
+
+  <!-- TOP NAV -->
+  <header class="nz-topbar">
+    <div class="nz-topbar-title">
+      <h1>NetZero IQ <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
+      <p>Sustainability Command Center — updated moments ago</p>
+    </div>
+
+    <div class="nz-topbar-actions">
+      <button class="nz-darkmode-toggle" id="darkModeToggle" type="button">
+        <span class="nz-toggle-track"><span class="nz-toggle-thumb"><i class="fa-solid fa-moon" id="darkModeIcon"></i></span></span>
+        <span id="darkModeLabel">Dark mode</span>
+      </button>
+      <button class="nz-icon-btn" type="button"><i class="fa-regular fa-bell"></i><span class="nz-notif-dot"></span></button>
+      <div class="nz-profile">
+        <div class="nz-avatar">SJ</div>
+        <div>
+          <div class="nz-profile-name">Samiksha Jaunjale <div>
+          <div class="nz-profile-role">ESG Manager</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--ink-soft);"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT PLACEHOLDER -->
+  <main class="nz-content" id="nz-content-root">
+
+    <!-- ================= EMPTY STATE (shown when no emission data exists yet) ================= -->
+    <div class="nz-card nz-empty-state" id="db-empty-state">
+      <i class="fa-solid fa-chart-line big"></i>
+      <h3>No emission data available</h3>
+      <p>Upload your Scope 1, Scope 2, and Scope 3 emissions to begin your Net Zero journey. Once you do, everything below updates automatically — live, from your own data.</p>
+      <a href="emission-upload.html" class="nz-btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Go to Emission Upload</a>
+    </div>
+
+    <!-- ================= LIVE DASHBOARD (hidden until emission data exists) ================= -->
+    <div id="db-live-content" style="display:none;">
+
+      <!-- ---- Live Emissions KPIs ---- -->
+      <div class="nz-section-heading" style="margin-top:0;">
+        <h2><i class="fa-solid fa-cloud"></i> Live Emissions</h2>
+        <a href="emission-upload.html" class="nz-section-link">Edit in Emission Upload <i class="fa-solid fa-arrow-right" style="font-size:10px;"></i></a>
+      </div>
+
+      <div class="nz-stats-grid" style="margin-bottom:22px;">
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top">
+            <span class="nz-stat-label">Total Emissions</span>
+            <span class="nz-stat-icon" style="background:rgba(16,87,63,0.1); color:var(--forest);"><i class="fa-solid fa-cloud"></i></span>
+          </div>
+          <div class="nz-stat-value" id="db-kpi-total">-- <small>tCO₂e</small></div>
+        </div>
+
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top">
+            <span class="nz-stat-label">Scope 1 · Direct</span>
+            <span class="nz-stat-icon" style="background:rgba(90,143,238,0.14); color:#3b6fd6;"><i class="fa-solid fa-fire"></i></span>
+          </div>
+          <div class="nz-stat-value" id="db-kpi-s1">-- <small>tCO₂e</small></div>
+        </div>
+
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top">
+            <span class="nz-stat-label">Scope 2 · Energy</span>
+            <span class="nz-stat-icon" style="background:rgba(46,111,224,0.12); color:var(--signal-blue);"><i class="fa-solid fa-bolt"></i></span>
+          </div>
+          <div class="nz-stat-value" id="db-kpi-s2">-- <small>tCO₂e</small></div>
+        </div>
+
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top">
+            <span class="nz-stat-label">Scope 3 · Value Chain</span>
+            <span class="nz-stat-icon" style="background:rgba(143,217,183,0.28); color:var(--forest);"><i class="fa-solid fa-truck-fast"></i></span>
+          </div>
+          <div class="nz-stat-value" id="db-kpi-s3">-- <small>tCO₂e</small></div>
+        </div>
+      </div>
+
+      <!-- ---- Pie chart + Reduction Plan + Offset Projects ---- -->
+      <div class="nz-charts-grid">
+
+        <!-- Scope distribution pie chart -->
+        <div class="nz-card nz-chart-card">
+          <div class="nz-chart-head">
+            <div>
+              <div class="nz-chart-title">Scope Distribution</div>
+              <div class="nz-chart-sub" id="db-dist-sub">Share of total emissions</div>
+            </div>
+            <span class="nz-chart-badge">Live</span>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:26px; margin-top:10px;">
+            <div style="position:relative; width:150px; height:150px; flex-shrink:0;">
+              <div id="db-dist-donut" style="width:150px;height:150px;border-radius:50%; background:#334155;"></div>
+              <div style="position:absolute; inset:24px; border-radius:50%; background:rgba(255,255,255,0.9); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; flex-direction:column; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);">
+                <div style="font-family:var(--font-mono); font-size:18px; font-weight:600; color:var(--ink);">3</div>
+                <div style="font-size:9px; text-transform:uppercase; letter-spacing:1px; color:var(--ink-soft);">scopes</div>
+              </div>
+            </div>
+
+            <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600;"><i class="fa-solid fa-circle" style="color:#5A8FEE; font-size:8px;"></i> Scope 1</span>
+                <span style="font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft);" id="db-dist-s1">--</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600;"><i class="fa-solid fa-circle" style="color:#2E6FE0; font-size:8px;"></i> Scope 2</span>
+                <span style="font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft);" id="db-dist-s2">--</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600;"><i class="fa-solid fa-circle" style="color:#10573F; font-size:8px;"></i> Scope 3</span>
+                <span style="font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft);" id="db-dist-s3">--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reduction Plan summary -->
+        <div class="nz-card nz-chart-card">
+          <div class="nz-chart-head">
+            <div>
+              <div class="nz-chart-title">Reduction Plan</div>
+              <div class="nz-chart-sub">Your saved annual reduction targets</div>
+            </div>
+            <span class="nz-chart-badge">Live</span>
+          </div>
+
+          <div id="db-reduction-summary" style="margin-top:14px;">
+            <div class="nz-summary-note"><i class="fa-solid fa-circle-info"></i> No reduction plan saved yet.</div>
+            <a href="reduction-planner.html" class="nz-btn-outline" style="margin-top:14px; font-size:12px; padding:8px 16px;">
+              <i class="fa-solid fa-sliders"></i> Go to Reduction Planner
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ---- Selected Offset Projects ---- -->
+      <div class="nz-section-heading">
+        <h2><i class="fa-solid fa-seedling"></i> Selected Offset Projects</h2>
+        <a href="offset-projects.html" class="nz-section-link">Manage in Offset Projects <i class="fa-solid fa-arrow-right" style="font-size:10px;"></i></a>
+      </div>
+
+      <div class="nz-card nz-offset-card" id="db-offset-list">
+        <div style="padding:22px; text-align:center; color:var(--ink-soft); font-size:12.5px;">
+          <i class="fa-solid fa-circle-info"></i> No offset projects selected yet. Visit Offset Projects to choose from your remaining-emissions recommendations.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="nz-footer">
+      <div>© 2026 NetZero IQ · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="theme.js"></script>
+<script src="activity-log.js"></script>
+<script src="net-zero-target.js"></script>
+<script src="offset-catalog-data.js"></script>
+<script src="dashboard-live.js"></script>
+</body>
+</html>

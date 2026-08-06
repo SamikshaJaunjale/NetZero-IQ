@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offset Projects · NetZero IQ · Net Zero Platform</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="nz-sidebar">
+  <div class="nz-brand">
+    <div class="nz-brand-mark"><i class="fa-solid fa-leaf"></i></div>
+    <div class="nz-brand-text">
+      <div class="nz-brand-title">NetZero IQ</div>
+      <div class="nz-brand-sub">Net Zero Platform</div>
+    </div>
+  </div>
+
+  <nav class="nz-nav">
+    <a href="index.html" class="nz-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="emission-upload.html" class="nz-link"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
+    <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
+    <a href="net-zero-scenarios.html" class="nz-link"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
+    <a href="offset-projects.html" class="nz-link active"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
+	<a href="reports.html" class="nz-link"><i class="fa-solid fa-file-lines"></i> Reports</a>
+
+    <!-- <div class="nz-nav-label">Account</div> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-gear"></i> Settings</a> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a> -->
+  <!-- </nav> -->
+
+  <!-- <div class="nz-sidebar-foot"> -->
+    <!-- <a href="#" class="nz-link" style="background:rgba(205,205,205,0.05);"> -->
+      <!-- <i class="fa-solid fa-circle-question"></i> Help &amp; Support -->
+    <!-- </a> -->
+  </div>
+</aside>
+
+<!-- ================= MAIN ================= -->
+<div class="nz-main">
+
+  <!-- TOP NAV -->
+  <header class="nz-topbar">
+    <div class="nz-topbar-title">
+      <h1>NetZero IQ <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
+      <p>Sustainability Command Center — updated moments ago</p>
+    </div>
+
+    <div class="nz-topbar-actions">
+      <button class="nz-darkmode-toggle" id="darkModeToggle" type="button">
+        <span class="nz-toggle-track"><span class="nz-toggle-thumb"><i class="fa-solid fa-moon" id="darkModeIcon"></i></span></span>
+        <span id="darkModeLabel">Dark mode</span>
+      </button>
+      <button class="nz-icon-btn" type="button"><i class="fa-regular fa-bell"></i><span class="nz-notif-dot"></span></button>
+      <div class="nz-profile">
+        <div class="nz-avatar">SJ</div>
+        <div>
+          <div class="nz-profile-name">Samiksha Jaunjale</div>
+          <div class="nz-profile-role">ESG Manager</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--ink-soft);"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="nz-content">
+
+    <div class="nz-breadcrumb">
+      <a href="index.html">Dashboard</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <span class="current">Offset Projects</span>
+    </div>
+
+    <div class="nz-page-header">
+      <h1>Offset Projects</h1>
+      <p>Recommended automatically from your remaining emissions after reduction planning — an enterprise carbon marketplace, not a search engine.</p>
+    </div>
+
+    <!-- ================= FATAL ERROR FALLBACK (should never normally show) ================= -->
+    <div class="nz-card nz-empty-state" id="op-fatal-error" style="display:none;">
+      <i class="fa-solid fa-triangle-exclamation big" style="color:var(--amber);"></i>
+      <h3>Something went wrong loading this page</h3>
+      <p>This usually means a required script didn't load, or this page's files are out of sync with the rest of the app. Try re-downloading the full file set together, or check the browser console for details.</p>
+      <button type="button" class="nz-btn-primary" onclick="window.location.reload()"><i class="fa-solid fa-rotate-right"></i> Reload Page</button>
+    </div>
+
+    <!-- ================= EMPTY STATE (no emission data at all) ================= -->
+    <div class="nz-card nz-empty-state" id="op-empty-state" style="display:none;">
+      <i class="fa-solid fa-seedling big"></i>
+      <h3>No emission data available yet</h3>
+      <p>Offset recommendations are based on your remaining emissions. Upload your Scope 1, Scope 2 and Scope 3 emissions first — and, ideally, save a Reduction Plan — so we can recommend the right mix of projects.</p>
+      <a href="emission-upload.html" class="nz-btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Go to Emission Upload</a>
+    </div>
+
+    <!-- ================= MAIN MARKETPLACE CONTENT ================= -->
+    <div id="op-main-content" style="display:none;">
+
+      <!-- Emissions snapshot — fetched automatically from Emission Upload + Reduction Planner -->
+      <div class="nz-section-heading" style="margin-top:0;">
+        <h2><i class="fa-solid fa-database"></i> Your Emissions Snapshot</h2>
+        <span class="nz-section-link" style="cursor:default;">Fetched automatically — nothing to enter here</span>
+      </div>
+
+      <div class="nz-stats-grid" style="grid-template-columns:repeat(6,1fr); margin-bottom:20px;">
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top"><span class="nz-stat-label">Scope 1</span>
+            <span class="nz-stat-icon" style="background:rgba(90,143,238,0.15); color:#3b6fd6;"><i class="fa-solid fa-fire"></i></span></div>
+          <div class="nz-stat-value" id="op-snap-s1" style="font-size:18px;">-- <small>tCO₂e</small></div>
+        </div>
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top"><span class="nz-stat-label">Scope 2</span>
+            <span class="nz-stat-icon" style="background:rgba(46,111,224,0.12); color:var(--signal-blue);"><i class="fa-solid fa-bolt"></i></span></div>
+          <div class="nz-stat-value" id="op-snap-s2" style="font-size:18px;">-- <small>tCO₂e</small></div>
+        </div>
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top"><span class="nz-stat-label">Scope 3</span>
+            <span class="nz-stat-icon" style="background:rgba(143,217,183,0.28); color:var(--forest);"><i class="fa-solid fa-truck-fast"></i></span></div>
+          <div class="nz-stat-value" id="op-snap-s3" style="font-size:18px;">-- <small>tCO₂e</small></div>
+        </div>
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top"><span class="nz-stat-label">Total Emissions</span>
+            <span class="nz-stat-icon" style="background:rgba(16,87,63,0.1); color:var(--forest);"><i class="fa-solid fa-cloud"></i></span></div>
+          <div class="nz-stat-value" id="op-snap-total" style="font-size:18px;">-- <small>tCO₂e</small></div>
+        </div>
+        <div class="nz-card nz-stat-card">
+          <div class="nz-stat-top"><span class="nz-stat-label">Planned Reduction</span>
+            <span class="nz-stat-icon" style="background:rgba(31,169,124,0.14); color:#1FA97C;"><i class="fa-solid fa-arrow-trend-down"></i></span></div>
+          <div class="nz-stat-value" id="op-snap-reduction" style="font-size:18px;">-- <small>tCO₂e</small></div>
+        </div>
+        <div class="nz-card nz-stat-card" style="background:linear-gradient(160deg, rgba(16,87,63,0.09), rgba(46,111,224,0.06));">
+          <div class="nz-stat-top"><span class="nz-stat-label">Remaining Emissions</span>
+            <span class="nz-stat-icon" style="background:rgba(16,87,63,0.14); color:var(--deep-forest);"><i class="fa-solid fa-gauge"></i></span></div>
+          <div class="nz-stat-value" id="op-snap-remaining" style="font-size:18px;">-- <small>tCO₂e</small></div>
+        </div>
+      </div>
+
+      <!-- Remaining emissions summary (the headline number the marketplace targets) -->
+      <div class="nz-card nz-op-remaining-card">
+        <div>
+          <div class="amt" id="op-remaining-amt">0.00 <small style="font-size:14px; font-weight:500; color:var(--ink-soft);">tCO₂e</small></div>
+          <div class="lbl">Remaining emissions to offset</div>
+        </div>
+        <div style="font-size:12px; color:var(--ink-soft); max-width:420px; text-align:right;" id="op-remaining-source">
+          <i class="fa-solid fa-circle-info"></i> Based on your uploaded emissions
+        </div>
+      </div>
+
+      <!-- Suggested portfolio (auto-recommended combination that covers the gap) -->
+      <div class="nz-card" id="op-suggested-portfolio" style="padding:18px 22px; margin-bottom:20px; display:none;">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+          <div style="font-family:var(--font-display); font-weight:700; font-size:14px; color:var(--ink);">
+            <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--signal-blue); margin-right:8px;"></i>Suggested Portfolio
+          </div>
+          <button type="button" class="nz-btn-outline" id="btn-apply-suggested" style="padding:6px 14px; font-size:12px;">
+            <i class="fa-solid fa-check"></i> Apply Suggested Portfolio
+          </button>
+        </div>
+        <div id="op-suggested-list" style="font-size:12.5px; color:var(--ink-soft); display:flex; flex-wrap:wrap; gap:8px 18px;"></div>
+      </div>
+
+      <!-- Filter / search / sort bar -->
+      <div class="nz-card nz-op-filterbar">
+        <div class="nz-op-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="form-control" id="op-search" placeholder="Search by project name or country…">
+        </div>
+        <select class="form-select" id="op-filter-type" style="max-width:180px;">
+          <option value="">All project types</option>
+        </select>
+        <select class="form-select" id="op-filter-standard" style="max-width:180px;">
+          <option value="">All carbon standards</option>
+        </select>
+        <select class="form-select" id="op-filter-country" style="max-width:150px;">
+          <option value="">All countries</option>
+        </select>
+        <select class="form-select" id="op-filter-region" style="max-width:160px;">
+          <option value="">All regions</option>
+        </select>
+        <select class="form-select" id="op-filter-vintage" style="max-width:140px;">
+          <option value="">All vintage years</option>
+        </select>
+        <select class="form-select" id="op-filter-verification" style="max-width:170px;">
+          <option value="">Any verification status</option>
+          <option value="Verified">Verified only</option>
+          <option value="Pending Verification">Pending verification</option>
+        </select>
+        <select class="form-select" id="op-filter-price" style="max-width:160px;">
+          <option value="">Any price</option>
+          <option value="10">Under £10/tonne</option>
+          <option value="20">Under £20/tonne</option>
+          <option value="50">Under £50/tonne</option>
+          <option value="999">Under £150/tonne</option>
+        </select>
+        <select class="form-select" id="op-sort" style="max-width:190px;">
+          <option value="rating">Sort: Best match / rating</option>
+          <option value="price-asc">Sort: Price (low to high)</option>
+          <option value="price-desc">Sort: Price (high to low)</option>
+          <option value="credits-desc">Sort: Carbon capacity</option>
+          <option value="newest">Sort: Newest vintage</option>
+        </select>
+      </div>
+
+      <div class="nz-op-results-count" id="op-results-count">Showing all projects</div>
+
+      <!-- Project grid -->
+      <div class="nz-op-grid" id="op-project-grid"></div>
+
+      <!-- ================= IMPLEMENTATION PLAN (hidden until generated) ================= -->
+      <div id="op-plan-section" style="display:none;">
+        <div class="nz-section-heading">
+          <h2><i class="fa-solid fa-clipboard-list"></i> Implementation Plan</h2>
+          <span class="nz-section-link" style="cursor:default;">Generated from your selected projects</span>
+        </div>
+
+        <div class="nz-card nz-table-card" style="margin-bottom:22px;">
+          <div class="nz-op-plan-table-wrap">
+            <table class="nz-op-plan-table">
+              <thead>
+                <tr>
+                  <th>Project</th><th>Country / Region</th><th>Standard</th>
+                  <th>Credits Purchased</th><th>Expected Offset</th>
+                  <th>Timeline</th><th>Est. Completion</th><th>Investment</th>
+                </tr>
+              </thead>
+              <tbody id="op-plan-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="nz-stats-grid" style="grid-template-columns:repeat(4,1fr); margin-bottom:26px;">
+          <div class="nz-card nz-stat-card">
+            <div class="nz-stat-top"><span class="nz-stat-label">Total Investment</span>
+              <span class="nz-stat-icon" style="background:rgba(46,111,224,0.12); color:var(--signal-blue);"><i class="fa-solid fa-sterling-sign"></i></span></div>
+            <div class="nz-stat-value" id="op-plan-total-cost">£0.00</div>
+          </div>
+          <div class="nz-card nz-stat-card">
+            <div class="nz-stat-top"><span class="nz-stat-label">Total Offset Secured</span>
+              <span class="nz-stat-icon" style="background:rgba(16,87,63,0.1); color:var(--forest);"><i class="fa-solid fa-arrow-trend-down"></i></span></div>
+            <div class="nz-stat-value" id="op-plan-total-offset">0.00 <small>tCO₂e</small></div>
+          </div>
+          <div class="nz-card nz-stat-card">
+            <div class="nz-stat-top"><span class="nz-stat-label">Net Remaining Emissions</span>
+              <span class="nz-stat-icon" style="background:rgba(90,143,238,0.15); color:#3b6fd6;"><i class="fa-solid fa-gauge"></i></span></div>
+            <div class="nz-stat-value" id="op-plan-net-remaining">0.00 <small>tCO₂e</small></div>
+          </div>
+          <div class="nz-card nz-stat-card">
+            <div class="nz-stat-top"><span class="nz-stat-label">SDGs Achieved</span>
+              <span class="nz-stat-icon" style="background:rgba(143,217,183,0.28); color:var(--forest);"><i class="fa-solid fa-earth-americas"></i></span></div>
+            <div class="nz-op-sdg-row" id="op-plan-sdgs" style="margin-top:6px;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sticky selection summary bar (shown once >= 1 project selected) -->
+    <div class="nz-op-selection-bar" id="op-selection-bar" style="display:none;">
+      <div class="nz-op-selection-stats">
+        <div class="stat"><div class="v" id="op-sel-count">0</div><div class="l">Projects selected</div></div>
+        <div class="stat"><div class="v" id="op-sel-offset">0.00 t</div><div class="l">Total offset</div></div>
+        <div class="stat"><div class="v" id="op-sel-balance">0.00 t</div><div class="l">Remaining balance</div></div>
+        <div class="stat"><div class="v" id="op-sel-cost">£0.00</div><div class="l">Total cost</div></div>
+      </div>
+      <div class="nz-action-group">
+        <button type="button" class="nz-btn-ghost danger" id="btn-clear-selection"><i class="fa-solid fa-xmark"></i> Clear Selection</button>
+        <button type="button" class="nz-btn-primary" id="btn-generate-plan"><i class="fa-solid fa-clipboard-check"></i> Generate Implementation Plan</button>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="nz-footer">
+      <div>© 2026 NetZero IQ · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="theme.js"></script>
+<script src="offset-catalog-data.js"></script>
+<script src="offset-projects.js"></script>
+</body>
+</html>

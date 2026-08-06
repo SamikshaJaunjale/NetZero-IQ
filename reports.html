@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · NetZero IQ · Net Zero Platform</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="nz-sidebar">
+  <div class="nz-brand">
+    <div class="nz-brand-mark"><i class="fa-solid fa-leaf"></i></div>
+    <div class="nz-brand-text">
+      <div class="nz-brand-title">NetZero IQ</div>
+      <div class="nz-brand-sub">Net Zero Platform</div>
+    </div>
+  </div>
+
+  <nav class="nz-nav">
+    <a href="index.html" class="nz-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="emission-upload.html" class="nz-link"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
+    <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
+    <a href="net-zero-scenarios.html" class="nz-link"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
+    <a href="offset-projects.html" class="nz-link"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-chart-line"></i> Progress Tracking</a> -->
+    <a href="reports.html" class="nz-link active"><i class="fa-solid fa-file-lines"></i> Reports</a>
+
+    <!-- <div class="nz-nav-label">Account</div> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-gear"></i> Settings</a> -->
+    <!-- <a href="#" class="nz-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a> -->
+  <!-- </nav> -->
+
+  <!-- <div class="nz-sidebar-foot"> -->
+    <!-- <a href="#" class="nz-link" style="background:rgba(255,255,255,0.05);"> -->
+      <!-- <i class="fa-solid fa-circle-question"></i> Help &amp; Support -->
+    <!-- </a> -->
+  <!-- </div> -->
+</aside>
+
+<!-- ================= MAIN ================= -->
+<div class="nz-main">
+
+  <!-- TOP NAV -->
+  <header class="nz-topbar">
+    <div class="nz-topbar-title">
+      <h1>NetZero IQ <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
+      <p>Sustainability Command Center — updated moments ago</p>
+    </div>
+
+    <div class="nz-topbar-actions">
+      <button class="nz-darkmode-toggle" id="darkModeToggle" type="button">
+        <span class="nz-toggle-track"><span class="nz-toggle-thumb"><i class="fa-solid fa-moon" id="darkModeIcon"></i></span></span>
+        <span id="darkModeLabel">Dark mode</span>
+      </button>
+      <button class="nz-icon-btn" type="button"><i class="fa-regular fa-bell"></i><span class="nz-notif-dot"></span></button>
+      <div class="nz-profile">
+        <div class="nz-avatar">SJ</div>
+        <div>
+          <div class="nz-profile-name">Samiksha Jaunjale</div>
+          <div class="nz-profile-role">ESG Manager</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--ink-soft);"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="nz-content">
+
+    <div class="nz-breadcrumb">
+      <a href="index.html">Dashboard</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
+      <span class="current">Reports</span>
+    </div>
+
+    <div class="nz-page-header" style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:14px;">
+      <div>
+        <h1>Sustainability Report</h1>
+        <p>Generated automatically from every module you've completed — nothing to enter here.</p>
+      </div>
+      <div class="nz-action-group">
+        <button type="button" class="nz-btn-outline" id="btn-generate-report">
+          <i class="fa-solid fa-arrows-rotate"></i> Generate Report
+        </button>
+        <button type="button" class="nz-btn-outline" id="btn-preview-report" disabled>
+          <i class="fa-solid fa-eye"></i> Preview Report
+        </button>
+        <button type="button" class="nz-btn-primary" id="btn-download-report" disabled>
+          <i class="fa-solid fa-file-arrow-down"></i> Download PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- ================= EMPTY STATE ================= -->
+    <div class="nz-card nz-empty-state" id="rpt-empty-state" style="display:none;">
+      <i class="fa-solid fa-file-circle-exclamation big"></i>
+      <h3>No emissions data available</h3>
+      <p>Please complete the Emission Upload process before generating the Carbon Footprint &amp; Net Zero Report.</p>
+      <a href="emission-upload.html" class="nz-btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Go to Emission Upload</a>
+    </div>
+
+    <!-- ================= LIVE REPORT PREVIEW ================= -->
+    <div id="rpt-main-content" style="display:none;">
+
+      <div class="nz-summary-note" style="margin-bottom:18px;">
+        <i class="fa-solid fa-circle-info"></i> This is a live on-screen preview. The downloaded PDF includes page numbers, headers and footers on every page.
+      </div>
+
+      <!-- Report document, styled to print/paginate cleanly -->
+      <div id="rpt-document">
+
+        <!-- COVER PAGE -->
+        <div class="nz-card nz-report-cover">
+          <div class="nz-report-cover-mark"><i class="fa-solid fa-leaf"></i></div>
+          <div class="nz-report-cover-title">Sustainability &amp;<br>Carbon Footprint Report</div>
+          <div class="nz-report-cover-company" id="rpt-cover-company">—</div>
+          <div class="nz-report-cover-meta">
+            <div><span class="l">Reporting Year</span><span class="v" id="rpt-cover-year">—</span></div>
+            <div><span class="l">Reporting Period</span><span class="v" id="rpt-cover-period">—</span></div>
+            <div><span class="l">Prepared By</span><span class="v" id="rpt-cover-preparedby">—</span></div>
+            <div><span class="l">Generation Date</span><span class="v" id="rpt-cover-date">—</span></div>
+            <div><span class="l">Version</span><span class="v" id="rpt-cover-version">1.0</span></div>
+          </div>
+        </div>
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="nz-card nz-report-section">
+          <h2>Table of Contents</h2>
+          <ol class="nz-report-toc" id="rpt-toc-list">
+            <li data-target="rpt-section-exec">Executive Summary</li>
+            <li data-target="rpt-section-company">Company &amp; Reporting Information</li>
+            <li data-target="rpt-section-inventory">Emission Inventory (Scope 1, 2 &amp; 3)</li>
+            <li data-target="rpt-section-charts">Emissions Analytics</li>
+            <li data-target="rpt-section-reduction">Reduction Planner</li>
+            <li data-target="rpt-section-scenarios">Net Zero Scenarios</li>
+            <li data-target="rpt-section-roadmap">Net Zero Roadmap</li>
+            <li data-target="rpt-section-offsets">Offset Projects</li>
+            <li data-target="rpt-section-sdgs">Sustainable Development Goals</li>
+            <li data-target="rpt-section-financial">Financial Summary</li>
+            <li data-target="rpt-section-dashboard">Dashboard Summary</li>
+            <li data-target="rpt-section-ai">AI Recommendations</li>
+            <li data-target="rpt-section-conclusion">Conclusion</li>
+            <li data-target="rpt-section-appendix">Appendix</li>
+          </ol>
+        </div>
+
+        <!-- 1. EXECUTIVE SUMMARY -->
+        <div class="nz-card nz-report-section" id="rpt-section-exec">
+          <h2>1. Executive Summary</h2>
+          <div class="nz-report-callout">
+            <div class="nz-report-callout-title">Current Performance</div>
+            <ul id="rpt-exec-performance"></ul>
+          </div>
+          <div class="nz-report-callout">
+            <div class="nz-report-callout-title">Recommendations</div>
+            <ul id="rpt-exec-recommendations"></ul>
+          </div>
+        </div>
+
+        <!-- 2. COMPANY INFO -->
+        <div class="nz-card nz-report-section" id="rpt-section-company">
+          <h2>2. Company &amp; Reporting Information</h2>
+          <div class="nz-report-field-grid" id="rpt-company-fields"></div>
+          <h3>Boundaries &amp; Methodology</h3>
+          <p class="nz-report-p">
+            This assessment covers <strong>Scope 1 (direct)</strong>, <strong>Scope 2 (purchased energy)</strong> and
+            <strong>Scope 3 (value chain)</strong> emissions, in line with the <em>GHG Protocol Corporate and Value Chain
+            (Scope 3) Accounting and Reporting Standards</em>. The organisational boundary is defined using the
+            operational control approach: all facilities and activities over which NetZero IQ has operational
+            control are included. Emission factors applied are consistent with recognised national inventory and
+            GHG Protocol guidance for the reporting categories in scope.
+          </p>
+        </div>
+
+        <!-- 3. EMISSION INVENTORY -->
+        <div class="nz-card nz-report-section" id="rpt-section-inventory">
+          <h2>3. Emission Inventory</h2>
+
+          <h3>Scope 1 · Direct Emissions</h3>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-scope1"></table></div>
+
+          <h3>Scope 2 · Purchased Energy</h3>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-scope2"></table></div>
+
+          <h3>Scope 3 · Value Chain Emissions</h3>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-scope3"></table></div>
+
+          <div class="nz-report-grandtotal" id="rpt-grandtotal-row"></div>
+        </div>
+
+        <!-- 4. CHARTS -->
+        <div class="nz-card nz-report-section" id="rpt-section-charts">
+          <h2>4. Emissions Analytics</h2>
+          <div class="nz-charts-grid">
+            <div class="nz-chart-card" id="rpt-chart-distribution">
+              <div class="nz-chart-title">Scope Distribution</div>
+              <div id="rpt-donut-scope"></div>
+            </div>
+            <div class="nz-chart-card" id="rpt-chart-category">
+              <div class="nz-chart-title">Top Emission Sources</div>
+              <div id="rpt-bars-category"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. REDUCTION PLANNER -->
+        <div class="nz-card nz-report-section" id="rpt-section-reduction">
+          <h2>5. Reduction Planner</h2>
+          <p class="nz-report-p" id="rpt-reduction-intro"></p>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-reduction"></table></div>
+        </div>
+
+        <!-- 6. NET ZERO SCENARIOS -->
+        <div class="nz-card nz-report-section" id="rpt-section-scenarios">
+          <h2>6. Net Zero Scenarios</h2>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-scenarios"></table></div>
+        </div>
+
+        <!-- 7. NET ZERO ROADMAP -->
+        <div class="nz-card nz-report-section" id="rpt-section-roadmap">
+          <h2>7. Net Zero Roadmap</h2>
+          <p class="nz-report-p" id="rpt-roadmap-intro"></p>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-roadmap"></table></div>
+          <p class="nz-report-footnote" id="rpt-roadmap-footnote"></p>
+        </div>
+
+        <!-- 8. OFFSET PROJECTS -->
+        <div class="nz-card nz-report-section" id="rpt-section-offsets">
+          <h2>8. Offset Projects</h2>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-offsets"></table></div>
+          <div class="nz-report-grandtotal" id="rpt-offset-summary"></div>
+        </div>
+
+        <!-- 9. SDGs -->
+        <div class="nz-card nz-report-section" id="rpt-section-sdgs">
+          <h2>9. Sustainable Development Goals</h2>
+          <p class="nz-report-p" id="rpt-sdg-intro"></p>
+          <div id="rpt-sdg-cards"></div>
+        </div>
+
+        <!-- 10. FINANCIAL SUMMARY -->
+        <div class="nz-card nz-report-section" id="rpt-section-financial">
+          <h2>10. Financial Summary</h2>
+          <div class="nz-stats-grid" style="grid-template-columns:repeat(4,1fr);" id="rpt-financial-kpis"></div>
+          <h3>Cost Breakdown by Project</h3>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-financial"></table></div>
+        </div>
+
+        <!-- 11. DASHBOARD SUMMARY -->
+        <div class="nz-card nz-report-section" id="rpt-section-dashboard">
+          <h2>11. Dashboard Summary</h2>
+          <div class="nz-stats-grid" style="grid-template-columns:repeat(4,1fr);" id="rpt-dashboard-kpis"></div>
+        </div>
+
+        <!-- 12. AI RECOMMENDATIONS -->
+        <div class="nz-card nz-report-section" id="rpt-section-ai">
+          <h2>12. AI Recommendations</h2>
+          <div class="nz-op-plan-table-wrap"><table class="nz-report-table" id="rpt-table-ai"></table></div>
+        </div>
+
+        <!-- 13. CONCLUSION -->
+        <div class="nz-card nz-report-section" id="rpt-section-conclusion">
+          <h2>13. Conclusion</h2>
+          <p class="nz-report-p" id="rpt-conclusion-text"></p>
+        </div>
+
+        <!-- 14. APPENDIX -->
+        <div class="nz-card nz-report-section" id="rpt-section-appendix">
+          <h2>14. Appendix</h2>
+          <h3>A.1 Calculation Methodology</h3>
+          <p class="nz-report-p">
+            Emissions are recorded on a direct <strong>tCO₂e</strong> basis per category, calculated by the organisation
+            from its own activity data and applicable emission factors (e.g. Defra, EPA or IPCC factors) prior to entry
+            into this platform: <em>Emissions (tCO₂e) = Activity Data × Emission Factor</em>. Annual reduction
+            projections apply the formula <em>Remaining = Current × (1 − Annual Reduction %)</em>. Net Zero years are
+            solved from a compound annual decline model, reaching Net Zero when emissions fall to within 2% of baseline —
+            the practical asymptotic threshold used since percentage-based decline never reaches exactly zero.
+          </p>
+          <h3>A.2 Data Referenced in This Report</h3>
+          <ul id="rpt-appendix-refs"></ul>
+          <h3>A.3 Abbreviations &amp; Glossary</h3>
+          <div class="nz-report-field-grid" id="rpt-glossary"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="nz-footer">
+      <div>© 2026 NetZero IQ · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
+      <div>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<script src="theme.js"></script>
+<script src="net-zero-target.js"></script>
+<script src="offset-catalog-data.js"></script>
+<script src="reports.js"></script>
+</body>
+</html>
