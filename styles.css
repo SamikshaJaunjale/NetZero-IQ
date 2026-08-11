@@ -1,1 +1,205 @@
+/* ============================================================
+   AUREX / NETZERO IQ — COMPLETE DESIGN SYSTEM
+   Original + Reports + Mobile Responsive
+   ============================================================ */
 
+/* ---------- DESIGN TOKENS ---------- */
+:root{
+  --deep-forest: #0A3B2C;
+  --forest: #10573F;
+  --forest-soft: #17714F;
+  --signal-blue: #2E6FE0;
+  --signal-blue-soft: #5A8FEE;
+  --paper: #F2F5F3;
+  --paper-dim: #E7ECE9;
+  --white: #FFFFFF;
+  --ink: #0F211B;
+  --ink-soft: #56685F;
+  --line: rgba(16,45,35,0.09);
+  --amber: #C98A2B;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  --shadow-card: 0 1px 2px rgba(15,33,27,0.04), 0 12px 32px -12px rgba(15,33,27,0.14);
+  --shadow-pop: 0 20px 48px -16px rgba(10,59,44,0.35);
+}
+
+/* ---------- DARK MODE TOKENS ---------- */
+body.nz-dark{
+  --paper: #0F172A;
+  --paper-dim: #1E293B;
+  --white: #1E293B;
+  --ink: #F8FAFC;
+  --ink-soft: #CBD5E1;
+  --line: #334155;
+  --deep-forest: #16A34A;
+  --forest: #22C55E;
+  --forest-soft: #34D399;
+  --amber: #F59E0B;
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px -12px rgba(0,0,0,0.55);
+  --shadow-pop: 0 20px 48px -16px rgba(0,0,0,0.65);
+
+  background:
+    radial-gradient(1100px 620px at 88% -8%, rgba(46,111,224,0.14), transparent 60%),
+    radial-gradient(900px 500px at 8% 0%, rgba(34,197,94,0.10), transparent 55%),
+    #0F172A;
+}
+
+/* ---------- BASE ---------- */
+*{box-sizing:border-box;}
+html,body{height:100%; margin:0; padding:0;}
+body{
+  background:
+    radial-gradient(1100px 620px at 88% -8%, rgba(46,111,224,0.10), transparent 60%),
+    radial-gradient(900px 500px at 8% 0%, rgba(16,87,63,0.10), transparent 55%),
+    var(--paper);
+  font-family:var(--font-body);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:13.5px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{ background:rgba(46,111,224,0.2); }
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-thumb{ background:rgba(16,87,63,0.25); border-radius:10px; }
+::-webkit-scrollbar-track{ background:transparent; }
+
+/* Smooth theme transition */
+body,
+.nz-sidebar,
+.nz-topbar,
+.nz-card,
+.nz-icon-btn,
+.nz-darkmode-toggle,
+.nz-profile,
+.nz-action-bar,
+.nz-field .form-control,
+.nz-field .form-select,
+.nz-emission-group .form-control,
+.nz-comment-input,
+.nz-toggle-track,
+.nz-toggle-thumb,
+table.nz-table tbody tr,
+table.nz-scope-table tbody tr{
+  transition:background-color .3s ease, color .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+/* ---------- SIDEBAR ---------- */
+.nz-sidebar{
+  position:fixed; top:0; left:0; bottom:0;
+  width:252px;
+  padding:26px 18px 22px;
+  background:linear-gradient(196deg, #0C4433 0%, #0A3B2C 45%, #082F24 100%);
+  display:flex; flex-direction:column;
+  z-index:1000;
+  box-shadow:8px 0 40px -20px rgba(0,0,0,0.4);
+}
+body.nz-dark .nz-sidebar{
+  background:linear-gradient(196deg, #111827 0%, #0B1220 45%, #060A12 100%);
+}
+
+.nz-brand{
+  display:flex; align-items:center; gap:12px;
+  padding:4px 8px 22px;
+  margin-bottom:18px;
+  border-bottom:1px solid rgba(255,255,255,0.09);
+}
+.nz-brand-mark{
+  width:40px; height:40px; border-radius:12px;
+  background:linear-gradient(145deg, var(--signal-blue), #1949a8);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:18px; flex-shrink:0;
+  box-shadow:0 8px 18px -6px rgba(46,111,224,0.6);
+}
+.nz-brand-text .nz-brand-title{
+  font-family:var(--font-display); font-size:15.5px; font-weight:700;
+  color:#fff; letter-spacing:0.2px; line-height:1.15;
+}
+.nz-brand-text .nz-brand-sub{
+  font-size:10.5px; color:rgba(255,255,255,0.55);
+  text-transform:uppercase; letter-spacing:1.4px; font-weight:600;
+}
+
+.nz-nav{ display:flex; flex-direction:column; gap:3px; flex:1; }
+.nz-nav-label{
+  font-size:10.5px; text-transform:uppercase; letter-spacing:1.3px;
+  color:rgba(255,255,255,0.38); font-weight:600;
+  padding:14px 12px 6px;
+}
+.nz-link{
+  display:flex; align-items:center; gap:12px;
+  padding:11px 13px; border-radius:12px;
+  color:rgba(255,255,255,0.72); text-decoration:none;
+  font-size:13.7px; font-weight:500; transition:.15s ease;
+  position:relative;
+}
+.nz-link i{ width:18px; text-align:center; font-size:14.5px; color:rgba(255,255,255,0.55); }
+.nz-link:hover{ background:rgba(255,255,255,0.06); color:#fff; }
+.nz-link:hover i{ color:#fff; }
+.nz-link.active{
+  background:linear-gradient(90deg, rgba(46,111,224,0.28), rgba(46,111,224,0.05));
+  color:#fff;
+  box-shadow:inset 0 0 0 1px rgba(90,143,238,0.35);
+}
+.nz-link.active i{ color:var(--signal-blue-soft); }
+.nz-link.active::before{
+  content:""; position:absolute; left:-18px; top:8px; bottom:8px; width:3px;
+  background:var(--signal-blue-soft); border-radius:4px;
+}
+.nz-sidebar-foot{
+  border-top:1px solid rgba(255,255,255,0.09);
+  padding-top:14px; margin-top:10px;
+}
+
+/* ---------- MOBILE SIDEBAR TOGGLES ---------- */
+.nz-mobile-toggle,
+.nz-sidebar-close{ display:none; }
+.nz-sidebar-backdrop{
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.45); backdrop-filter:blur(2px);
+  z-index:999; opacity:0; transition:opacity .25s ease;
+}
+.nz-sidebar-backdrop.show{ display:block; opacity:1; }
+
+/* ---------- MAIN / TOPBAR ---------- */
+.nz-main{ margin-left:252px; min-height:100vh; display:flex; flex-direction:column; }
+.nz-topbar{
+  position:sticky; top:0; z-index:900;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:20px; padding:14px 30px;
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  border-bottom:1px solid var(--line);
+}
+body.nz-dark .nz-topbar{ background:rgba(30,41,59,0.85); }
+
+.nz-topbar-start{ display:flex; align-items:center; gap:12px; }
+.nz-topbar-title h1{
+  font-family:var(--font-display); font-size:19px; font-weight:700;
+  margin:0; color:var(--deep-forest); display:flex; align-items:center; gap:10px;
+}
+.nz-year-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--font-mono); font-size:11.5px; font-weight:600;
+  color:var(--forest); background:rgba(16,87,63,0.09);
+  border:1px solid rgba(16,87,63,0.16); padding:2px 10px;
+  border-radius:20px; margin-left:10px; vertical-align:middle;
+}
+.nz-topbar-title p{ margin:2px 0 0; font-size:12.5px; color:var(--ink-soft); }
+.nz-topbar-actions{ display:flex; align-items:center; gap:10px; }
+
+.nz-icon-btn{
+  width:40px; height:40px; border-radius:12px;
+  border:1px solid var(--line); background:rgba(255,255,255,0.7);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--ink-soft); position:relative; transition:.15s ease;
+}
+.nz-icon-btn:hover{ background:#fff; color:var(--deep-forest); box-shadow:
