@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NetZero IQ · Net Zero Planning &amp; Optimization Platform</title>
+<title>Aurex Industries · Net Zero Planning &amp; Optimization Platform</title>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link href="styles.css" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -20,12 +19,12 @@
   <div class="nz-brand">
     <div class="nz-brand-mark"><i class="fa-solid fa-leaf"></i></div>
     <div class="nz-brand-text">
-      <div class="nz-brand-title">NetZero IQ</div>
+      <div class="nz-brand-title">Aurex Industries</div>
       <div class="nz-brand-sub">Net Zero Platform</div>
     </div>
   </div>
 
-  <nav class="nz-nav">
+  <nav class="nz-nav" id="nzSidebarNav">
     <a href="index.html" class="nz-link active"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
     <a href="emission-upload.html" class="nz-link"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
     <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
@@ -46,13 +45,18 @@
   </div>
 </aside>
 
+<div class="nz-nav-overlay" id="navOverlay"></div>
+
 <!-- ================= MAIN ================= -->
 <div class="nz-main">
 
   <!-- TOP NAV -->
   <header class="nz-topbar">
+    <button class="nz-hamburger-btn" id="navHamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nzSidebarNav">
+      <i class="fa-solid fa-bars"></i>
+    </button>
     <div class="nz-topbar-title">
-      <h1>NetZero IQ <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
+      <h1>Aurex Industries <span class="nz-year-badge"><i class="fa-solid fa-calendar"></i> FY 2026</span></h1>
       <p>Sustainability Command Center — updated moments ago</p>
     </div>
 
@@ -63,9 +67,9 @@
       </button>
       <button class="nz-icon-btn" type="button"><i class="fa-regular fa-bell"></i><span class="nz-notif-dot"></span></button>
       <div class="nz-profile">
-        <div class="nz-avatar">SJ</div>
+        <div class="nz-avatar">SC</div>
         <div>
-          <div class="nz-profile-name">Samiksha Jaunjale <div>
+          <div class="nz-profile-name">Sarah Chen</div>
           <div class="nz-profile-role">ESG Manager</div>
         </div>
         <i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--ink-soft);"></i>
@@ -202,7 +206,7 @@
 
     <!-- ================= FOOTER ================= -->
     <div class="nz-footer">
-      <div>© 2026 NetZero IQ · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
+      <div>© 2026 Aurex Industries · Net Zero Planning &amp; Optimization Platform · v2.4.1</div>
       <div>
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
@@ -213,6 +217,7 @@
   </main>
 </div>
 
+<script src="responsive-nav.js"></script>
 <script src="theme.js"></script>
 <script src="activity-log.js"></script>
 <script src="net-zero-target.js"></script>
