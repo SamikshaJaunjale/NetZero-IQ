@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link href="styles.css" rel="stylesheet">
+<base target="_blank">
 </head>
 <body>
 
@@ -90,6 +91,19 @@
     <!-- ================= MAIN SCENARIOS CONTENT ================= -->
     <div id="nzs-main-content" style="display:none;">
 
+      <!-- ================= OFFICIAL TARGET YEAR CALLOUT (MOVED TO TOP) ================= -->
+      <div class="nz-ring-card" style="max-width:none; margin-bottom:22px; flex-direction:row; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+        <div>
+          <div class="nz-ring-eyebrow">Official platform-wide value</div>
+          <div class="nz-ring-heading" style="margin-bottom:6px;">Net Zero Target Year</div>
+          <div style="font-size:12.5px; color:rgba(255,255,255,0.7);" data-nz-target-note>Not yet set</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="t-value" style="font-size:40px; line-height:1;" data-nz-target-year>Pending</div>
+          <div class="t-label" style="margin-top:4px;">Set by the Moderate scenario · appears on Dashboard and every module</div>
+        </div>
+      </div>
+
       <!-- ================= SOURCE NOTE ================= -->
       <div class="nz-card" style="padding:16px 22px; margin-bottom:22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
         <div class="left-note" id="nzs-source-note" style="font-size:12px; color:var(--ink-soft); display:flex; align-items:center; gap:8px;">
@@ -108,19 +122,6 @@
 
       <div class="nz-charts-grid" id="nzs-scenario-cards">
         <!-- JS renders 3 scenario cards here: Conservative / Moderate / Aggressive -->
-      </div>
-
-      <!-- ================= OFFICIAL TARGET YEAR CALLOUT ================= -->
-      <div class="nz-ring-card" style="max-width:none; margin-top:22px; flex-direction:row; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
-        <div>
-          <div class="nz-ring-eyebrow">Official platform-wide value</div>
-          <div class="nz-ring-heading" style="margin-bottom:6px;">Net Zero Target Year</div>
-          <div style="font-size:12.5px; color:rgba(255,255,255,0.7);" data-nz-target-note>Not yet set</div>
-        </div>
-        <div style="text-align:right;">
-          <div class="t-value" style="font-size:40px; line-height:1;" data-nz-target-year>Pending</div>
-          <div class="t-label" style="margin-top:4px;">Set by the Moderate scenario · appears on Dashboard and every module</div>
-        </div>
       </div>
 
     </div>
