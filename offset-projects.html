@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link href="styles.css" rel="stylesheet">
+<base target="_blank">
 </head>
 <body>
 
@@ -30,19 +31,8 @@
     <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
     <a href="net-zero-scenarios.html" class="nz-link"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
     <a href="offset-projects.html" class="nz-link active"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
-    <a href="#" class="nz-link"><i class="fa-solid fa-chart-line"></i> Progress Tracking</a>
     <a href="reports.html" class="nz-link"><i class="fa-solid fa-file-lines"></i> Reports</a>
-
-    <div class="nz-nav-label">Account</div>
-    <a href="#" class="nz-link"><i class="fa-solid fa-gear"></i> Settings</a>
-    <a href="#" class="nz-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
   </nav>
-
-  <div class="nz-sidebar-foot">
-    <a href="#" class="nz-link" style="background:rgba(255,255,255,0.05);">
-      <i class="fa-solid fa-circle-question"></i> Help &amp; Support
-    </a>
-  </div>
 </aside>
 
 <div class="nz-nav-overlay" id="navOverlay"></div>
@@ -99,7 +89,8 @@
     </div>
 
     <!-- ================= EMPTY STATE (no emission data at all) ================= -->
-    <div class="nz-card nz-empty-state" id="op-empty-state" style="display:none;">
+    <!-- REMOVED display:none so it shows by default; JS will hide it when data is found -->
+    <div class="nz-card nz-empty-state" id="op-empty-state">
       <i class="fa-solid fa-seedling big"></i>
       <h3>No emission data available yet</h3>
       <p>Offset recommendations are based on your remaining emissions. Upload your Scope 1, Scope 2 and Scope 3 emissions first — and, ideally, save a Reduction Plan — so we can recommend the right mix of projects.</p>
@@ -299,5 +290,50 @@
 <script src="activity-log.js"></script>
 <script src="offset-catalog-data.js"></script>
 <script src="offset-projects.js"></script>
+
+<!-- ================= FALLBACK VISIBILITY SCRIPT ================= -->
+<!-- If offset-projects.js fails to load or has an error, this ensures the page still works -->
+<script>
+(function() {
+  function checkEmissionData() {
+    try {
+      var hasData = false;
+      // Common keys used across the NetZero IQ platform
+      var keys = ['emissionData','emissions','scope1','scope2','scope3','totalEmissions','nz_emissions','reductionPlan'];
+      for (var i = 0; i < keys.length; i++) {
+        if (localStorage.getItem(keys[i])) { hasData = true; break; }
+      }
+      // Also scan for any key containing "emission" or "scope"
+      if (!hasData) {
+        for (var i = 0; i < localStorage.length; i++) {
+          var k = (localStorage.key(i) || '').toLowerCase();
+          if (k.indexOf('emission') !== -1 || k.indexOf('scope') !== -1 || k.indexOf('reduction') !== -1) {
+            hasData = true; break;
+          }
+        }
+      }
+      var emptyState = document.getElementById('op-empty-state');
+      var mainContent = document.getElementById('op-main-content');
+      if (!emptyState || !mainContent) return;
+      if (hasData) {
+        emptyState.style.display = 'none';
+        mainContent.style.display = 'block';
+      } else {
+        emptyState.style.display = '';
+        mainContent.style.display = 'none';
+      }
+    } catch (e) {
+      // localStorage blocked or other error — keep empty state visible
+    }
+  }
+  // Run after DOM ready, slightly delayed so offset-projects.js gets first chance
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(checkEmissionData, 50); });
+  } else {
+    setTimeout(checkEmissionData, 50);
+  }
+})();
+</script>
+
 </body>
 </html>
