@@ -116,7 +116,7 @@
      2. RENDER — COVER + TOC
      ============================================================ */
   function renderCover(data) {
-    document.getElementById("rpt-cover-company").textContent = data.company["company-name"] || "Aurex Industries";
+    document.getElementById("rpt-cover-company").textContent = data.company["company-name"] || "NetZero IQ";
     document.getElementById("rpt-cover-year").textContent = data.company["reporting-year"] || "—";
     document.getElementById("rpt-cover-period").textContent = data.company["reporting-period"] || "—";
     document.getElementById("rpt-cover-preparedby").textContent = "Samiksha Jaunjale, ESG Manager";
