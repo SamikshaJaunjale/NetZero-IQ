@@ -119,7 +119,7 @@
     document.getElementById("rpt-cover-company").textContent = data.company["company-name"] || "Aurex Industries";
     document.getElementById("rpt-cover-year").textContent = data.company["reporting-year"] || "—";
     document.getElementById("rpt-cover-period").textContent = data.company["reporting-period"] || "—";
-    document.getElementById("rpt-cover-preparedby").textContent = "Sarah Chen, ESG Manager";
+    document.getElementById("rpt-cover-preparedby").textContent = "Samiksha Jaunjale, ESG Manager";
     document.getElementById("rpt-cover-date").textContent = todayString();
     document.getElementById("rpt-cover-version").textContent = "1.0";
   }
