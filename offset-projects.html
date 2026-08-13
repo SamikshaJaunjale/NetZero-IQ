@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link href="styles.css" rel="stylesheet">
+<!-- REMOVED: <base target="_blank"> — this was causing ALL links to open in new tabs -->
 <base target="_blank">
 </head>
 <body>
@@ -26,12 +27,13 @@
   </div>
 
   <nav class="nz-nav" id="nzSidebarNav">
-    <a href="index.html" class="nz-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
-    <a href="emission-upload.html" class="nz-link"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
-    <a href="reduction-planner.html" class="nz-link"><i class="fa-solid fa-route"></i> Reduction Planner</a>
-    <a href="net-zero-scenarios.html" class="nz-link"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
-    <a href="offset-projects.html" class="nz-link active"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
-    <a href="reports.html" class="nz-link"><i class="fa-solid fa-file-lines"></i> Reports</a>
+    <!-- Added target="_self" to all internal nav links as a safeguard -->
+    <a href="index.html" class="nz-link" target="_self"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+    <a href="emission-upload.html" class="nz-link" target="_self"><i class="fa-solid fa-cloud-arrow-up"></i> Emission Upload</a>
+    <a href="reduction-planner.html" class="nz-link" target="_self"><i class="fa-solid fa-route"></i> Reduction Planner</a>
+    <a href="net-zero-scenarios.html" class="nz-link" target="_self"><i class="fa-solid fa-bullseye"></i> Net Zero Scenarios</a>
+    <a href="offset-projects.html" class="nz-link active" target="_self"><i class="fa-solid fa-seedling"></i> Offset Projects</a>
+    <a href="reports.html" class="nz-link" target="_self"><i class="fa-solid fa-file-lines"></i> Reports</a>
   </nav>
 </aside>
 
@@ -70,7 +72,7 @@
   <main class="nz-content">
 
     <div class="nz-breadcrumb">
-      <a href="index.html">Dashboard</a>
+      <a href="index.html" target="_self">Dashboard</a>
       <i class="fa-solid fa-chevron-right" style="font-size:9px;"></i>
       <span class="current">Offset Projects</span>
     </div>
@@ -89,12 +91,11 @@
     </div>
 
     <!-- ================= EMPTY STATE (no emission data at all) ================= -->
-    <!-- REMOVED display:none so it shows by default; JS will hide it when data is found -->
     <div class="nz-card nz-empty-state" id="op-empty-state">
       <i class="fa-solid fa-seedling big"></i>
       <h3>No emission data available yet</h3>
       <p>Offset recommendations are based on your remaining emissions. Upload your Scope 1, Scope 2 and Scope 3 emissions first — and, ideally, save a Reduction Plan — so we can recommend the right mix of projects.</p>
-      <a href="emission-upload.html" class="nz-btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Go to Emission Upload</a>
+      <a href="emission-upload.html" class="nz-btn-primary" target="_self"><i class="fa-solid fa-cloud-arrow-up"></i> Go to Emission Upload</a>
     </div>
 
     <!-- ================= MAIN MARKETPLACE CONTENT ================= -->
@@ -298,16 +299,16 @@
   function checkEmissionData() {
     try {
       var hasData = false;
-      // Common keys used across the NetZero IQ platform
-      var keys = ['emissionData','emissions','scope1','scope2','scope3','totalEmissions','nz_emissions','reductionPlan'];
+      // FIXED: Use sessionStorage (not localStorage) and correct keys matching the platform
+      var keys = ['nz-emission-data','nz-reduction-plan','emissionData','emissions'];
       for (var i = 0; i < keys.length; i++) {
-        if (localStorage.getItem(keys[i])) { hasData = true; break; }
+        if (sessionStorage.getItem(keys[i])) { hasData = true; break; }
       }
-      // Also scan for any key containing "emission" or "scope"
+      // Also scan for any key containing "emission" or "reduction"
       if (!hasData) {
-        for (var i = 0; i < localStorage.length; i++) {
-          var k = (localStorage.key(i) || '').toLowerCase();
-          if (k.indexOf('emission') !== -1 || k.indexOf('scope') !== -1 || k.indexOf('reduction') !== -1) {
+        for (var i = 0; i < sessionStorage.length; i++) {
+          var k = (sessionStorage.key(i) || '').toLowerCase();
+          if (k.indexOf('emission') !== -1 || k.indexOf('reduction') !== -1) {
             hasData = true; break;
           }
         }
@@ -315,15 +316,19 @@
       var emptyState = document.getElementById('op-empty-state');
       var mainContent = document.getElementById('op-main-content');
       if (!emptyState || !mainContent) return;
-      if (hasData) {
-        emptyState.style.display = 'none';
-        mainContent.style.display = 'block';
-      } else {
-        emptyState.style.display = '';
-        mainContent.style.display = 'none';
+
+      // FIXED: Only override if main JS hasn't already run successfully
+      if (mainContent.style.display !== 'block') {
+        if (hasData) {
+          emptyState.style.display = 'none';
+          mainContent.style.display = 'block';
+        } else {
+          emptyState.style.display = '';
+          mainContent.style.display = 'none';
+        }
       }
     } catch (e) {
-      // localStorage blocked or other error — keep empty state visible
+      // sessionStorage blocked or other error — keep empty state visible
     }
   }
   // Run after DOM ready, slightly delayed so offset-projects.js gets first chance
